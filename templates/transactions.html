@@ -1,0 +1,19 @@
+<h1>CafeGo</h1>
+
+<p>Welcome, {{ .User.Username }}!</p>
+<p><a href="/">Back to home</a></p>
+
+<h2>Transaction History</h2>
+
+{{ if not .History }}
+<p>No transactions yet.</p>
+{{ end }} {{ range $t := .History }}
+<h3>Transaction #{{ $t.Id }} — {{ $t.CreatedAt }}</h3>
+<ul>
+  {{ range $item := $t.Items }}
+  <li>{{ $item.Quantity }} × {{ $item.ProductName }} (₱{{ $item.Price }})</li>
+  {{ end }}
+</ul>
+<p><strong>Total: ₱{{ $t.Total }}</strong></p>
+<hr />
+{{ end }}
